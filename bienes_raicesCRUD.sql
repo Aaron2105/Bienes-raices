@@ -153,7 +153,7 @@ LOCK TABLES `usuarios` WRITE;
 /*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
 
 -- 1. Tu Super Admin (ID 1)
-INSERT INTO `usuarios` VALUES (1,'correo@correo.com','$2y$10$smxhYWS5fRVso2t.x6FD9Omw966zbaTCCsH8ghazzvW/.R9P7uQ1S', 1);
+INSERT INTO `usuarios` VALUES (1,'correo@correo.com','$2y$10$HDxlv0dhTAaJILOBNxFHDeyo1i8IITzVoj1CaI1vmWqasteLFghri', 1);
 
 -- 2. Comprador de prueba (ID 2)
 INSERT INTO `usuarios` VALUES (2,'usuario@correo.com','$2y$10$HDxlv0dhTAaJILOBNxFHDeyo1i8IITzVoj1CaI1vmWqasteLFghri', 3);

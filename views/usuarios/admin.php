@@ -17,7 +17,7 @@
                     <td><p><?php echo $usuario->id; ?></p></td>
                     <td><p><?php echo $usuario->email; ?></p></td>
                     <td>
-                        <?php if($usuario->id == 6): ?>
+                        <?php if($usuario->id == 1): ?>
                             <span class="alerta exito" style="display:inline-block; margin:0; padding: 0.5rem 1rem;">👑 Super Admin</span>
                         <?php else: ?>
                             
@@ -46,7 +46,7 @@
                         <?php endif; ?>
                     </td>
                     <td>
-                        <?php if($usuario->id != 6): ?>
+                        <?php if($usuario->id != 1): ?>
                             <form method="POST" class="w-100" action="/usuarios/eliminar"> <input type="hidden" name="id" value="<?php echo $usuario->id; ?>">
                                 <input type="submit" class="boton-rojo-block" value="Eliminar">
                             </form>

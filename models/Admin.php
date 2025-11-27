@@ -64,7 +64,6 @@ class Admin extends ActiveRecord {
     }
 
     public function autenticar() {
-        session_start();
 
         $_SESSION["usuario"] = $this->email;
         $_SESSION["login"] = true;

@@ -1,13 +1,19 @@
-<?php
+<?php 
 
-function conectarDB() : mysqli{
-    $db = new mysqli("localhost", "root", "@aron2105", "bienesraices_crud");
-    mysqli_set_charset($db, "utf8");
+function conectarDB() : mysqli {
+    $host = $_ENV['DB_HOST'] ?? 'db'; 
+    
+    $db = new mysqli(
+        $host,             
+        'root',            
+        'root',           
+        'bienesraices_crud' 
+    );
 
-    if(!$db){
-        echo "Error! Conexión fallida";
+    if(!$db) {
+        echo "Error no se pudo conectar";
         exit;
-    }
+    } 
 
     return $db;
 }

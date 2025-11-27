@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  # SERVICIO WEB (Tu página)
+  app:
+    build: .
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    ports:
+      - "8080:80" # Tu página se verá en http://localhost:8080
+    volumes:
+      - .:/var/www/html # Sincroniza tu carpeta actual con el contenedor (para ver cambios al editar)
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db # El nombre del servicio de abajo
+      
+  # SERVICIO BASE DE DATOS (MySQL)
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bienesraices_crud
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: admin
+    ports:
+      - "3307:3306" # Acceso externo opcional en puerto 3307
+    volumes:
+      - ./bienes_raicesCRUD.sql:/docker-entrypoint-initdb.d/init.sql
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
