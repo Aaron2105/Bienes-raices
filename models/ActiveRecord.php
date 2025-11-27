@@ -14,7 +14,9 @@ class ActiveRecord{
 
     protected static $errores = [];
 
+    public $id;
 
+    public $imagen;
 
     //Definir la conexion a la DB
 
@@ -163,7 +165,10 @@ class ActiveRecord{
         return $resultado;
     }
 
-    //Busca propiedad por id
+    /**
+     * Busca un registro por su ID
+     * @return static
+     */
     public static function find($id){
         $query = "SELECT * FROM " . static::$tabla . " WHERE id=$id";
 

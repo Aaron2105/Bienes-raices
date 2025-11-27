@@ -6,6 +6,8 @@ use Controllers\PropiedadController;
 use Controllers\VendedorController;
 use Controllers\PaginasController;
 use Controllers\LoginController;
+use Controllers\RolController;
+use Controllers\UsuarioController;
 
 $router = new Router();
 
@@ -32,6 +34,14 @@ $router->get("/blog", [PaginasController::class, "blog"]);
 $router->get("/entrada", [PaginasController::class, "entrada"]);
 $router->get("/contacto", [PaginasController::class, "contacto"]);
 $router->post("/contacto", [PaginasController::class, "contacto"]);
+
+$router->get("/compra", [PaginasController::class, "compra"]);
+
+$router->get('/roles/crear', [RolController::class, 'crear']);
+$router->post('/roles/crear', [RolController::class, 'crear']);
+
+$router->get('/usuarios', [UsuarioController::class, 'index']);
+$router->post('/usuarios', [UsuarioController::class, 'index']);
 
 //Login y autenticacion
 $router->get("/login", [LoginController::class, "login"]);

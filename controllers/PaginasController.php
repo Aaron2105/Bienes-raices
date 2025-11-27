@@ -15,6 +15,16 @@ class PaginasController {
             "inicio" => $inicio
         ]);
     }
+
+    public static function compra(Router $router) {
+        $id = validarRedirec("/");
+
+        $propiedad = Propiedad::find($id);
+
+        $router->render("paginas/compra", [
+            "propiedad" => $propiedad
+        ]);
+    }
     public static function nosotros(Router $router){
 
         $router->render("paginas/nosotros");

@@ -5,7 +5,15 @@
         <img loading="lazy" src="/imagenes/<?php echo $propiedad->imagen; ?>" alt="Imagen destacada">
 
         <div class="resumen-propiedad">
-            <p class="precio">$<?php echo $propiedad->precio; ?></p>
+            <p class="precio"><?php echo "$" . number_format($propiedad->precio); ?></p>
+            <?php 
+                // Verificamos si la sesión está iniciada y si el rol es 'comprador'
+                if(tienePermiso('comprar_propiedad')): 
+            ?>
+                <a href="/compra?id=<?php echo $propiedad->id; ?>" class="boton-verde" style="display: block; text-align: center; margin-top: 2rem;">
+                    💰 Comprar Ahora
+                </a>
+            <?php endif; ?>
             <ul class="iconos-caracteristicas">
                 <li>
                     <img class="figura" loading="lazy" src="/build/img/icono_wc.svg" alt="WC">

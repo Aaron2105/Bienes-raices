@@ -41,26 +41,39 @@ function mostrarMetodosContacto( event ){
 
 }
 
-function darkMode(){
+function darkMode() {
+    // 1. Seleccionamos las preferencias del sistema
+    const prefiereDarkMode = window.matchMedia("(prefers-color-scheme: dark)");
+    
+    // 2. Leemos si el usuario ya eligió algo antes en LocalStorage
+    const memoria = localStorage.getItem('dark-mode');
 
-    const darkMode = window.matchMedia("(prefers-color-scheme: dark)");
-
-    systemDarkMode(darkMode);
-
-    darkMode.addEventListener("change", systemDarkMode(darkMode));
-    const botonDarkMode = document.querySelector(".boton-darkmode");
-    botonDarkMode.addEventListener("click", cambiarModo);
-}
-
-function systemDarkMode(darkMode){
-    if (darkMode.matches){
-        document.body.classList.add("darkmode")
+    // 3. APLICAR MODO: 
+    // Si hay memoria, la respetamos. Si no, usamos la del sistema.
+    if (memoria === 'true') {
+        document.body.classList.add('dark-mode');
+    } else if (memoria === 'false') {
+        document.body.classList.remove('dark-mode');
     } else {
-        document.body.classList.remove("darkmode")
+        // Si no hay memoria, revisamos el sistema
+        if (prefiereDarkMode.matches) {
+            document.body.classList.add('dark-mode');
+        }
     }
-}
-function cambiarModo(){
-    document.body.classList.toggle("dark-mode");
+
+    // 4. EVENTO CLICK EN EL BOTÓN
+    const botonDarkMode = document.querySelector('.boton-darkmode');
+    
+    botonDarkMode.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        
+        // 5. GUARDAR EN MEMORIA CADA VEZ QUE SE DA CLICK
+        if (document.body.classList.contains('dark-mode')) {
+            localStorage.setItem('dark-mode', 'true');
+        } else {
+            localStorage.setItem('dark-mode', 'false');
+        }
+    });
 }
 
 function navegacionResponsive(){

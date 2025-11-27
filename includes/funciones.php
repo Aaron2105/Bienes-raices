@@ -73,3 +73,10 @@ function validarRedirec (string $url){
 
     return $id;
 }
+
+function tienePermiso($permiso) {
+    if(!isset($_SESSION['permisos'])) {
+        return false;
+    }
+    return in_array($permiso, $_SESSION['permisos']);
+}

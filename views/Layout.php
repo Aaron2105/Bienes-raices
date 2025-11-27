@@ -42,6 +42,9 @@
                         <a href="/propiedades">Anuncios</a>
                         <a href="/blog">Blog</a>
                         <a href="/contacto">Contacto</a>
+                        <?php if (isset($_SESSION['acceso_admin']) && $_SESSION['acceso_admin']): ?>
+                            <a href="/admin">Admin</a>
+                        <?php endif; ?>
 
                         <?php if ($auth){ ?>
 
