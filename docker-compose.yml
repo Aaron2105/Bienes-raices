@@ -10,11 +10,14 @@ services:
     ports:
       - "8080:80" # Tu página se verá en http://localhost:8080
     volumes:
-      - .:/var/www/html # Sincroniza tu carpeta actual con el contenedor (para ver cambios al editar)
+      - .:/var/www/html
+      - /var/www/html/vendor        
+      - /var/www/html/node_modules  
+      - /var/www/html/public/build
     depends_on:
       - db
     environment:
-      - DB_HOST=db # El nombre del servicio de abajo
+      - DB_HOST=db
       
   # SERVICIO BASE DE DATOS (MySQL)
   db:
@@ -26,7 +29,7 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     ports:
-      - "3307:3306" # Acceso externo opcional en puerto 3307
+      - "3307:3306"
     volumes:
       - ./bienes_raicesCRUD.sql:/docker-entrypoint-initdb.d/init.sql
       - db_data:/var/lib/mysql

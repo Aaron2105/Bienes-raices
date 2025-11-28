@@ -26,11 +26,11 @@ COPY package.json package-lock.json ./
 RUN composer install --no-interaction --optimize-autoloader
 RUN npm install
 
-# --- AQUÍ ESTÁ EL COPY QUE PREGUNTAS (SÍ, DÉJALO) ---
 COPY . .
-# ----------------------------------------------------
 
-# Quitamos Gulp de aquí para evitar que se cuelgue
-# RUN npx gulp ... (BORRADO/COMENTADO)
+RUN npx gulp css
+RUN npx gulp javascript
+RUN npx gulp imagenes
+RUN npx gulp versionWebp
 
 RUN chown -R www-data:www-data /var/www/html

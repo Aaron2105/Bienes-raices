@@ -8,7 +8,6 @@ const concat = require('gulp-concat');
 const terser = require('gulp-terser-js');
 const rename = require('gulp-rename');
 const imagemin = require('gulp-imagemin'); // Minificar imagenes 
-const notify = require('gulp-notify');
 const cache = require('gulp-cache');
 const clean = require('gulp-clean');
 const webp = require('gulp-webp');
@@ -24,7 +23,6 @@ function css() {
         .pipe(sourcemaps.init())
         .pipe(sass())
         .pipe(postcss([autoprefixer(), cssnano()]))
-        // .pipe(postcss([autoprefixer()]))
         .pipe(sourcemaps.write('.'))
         .pipe(dest('public/build/css'));
 }
@@ -42,17 +40,14 @@ function javascript() {
 function imagenes() {
     return src(paths.imagenes)
         .pipe(cache(imagemin({ optimizationLevel: 3 })))
-        .pipe(dest('public/build/img'))
-        .pipe(notify({ message: 'Imagen Completada' }));
+        .pipe(dest('public/build/img'));
 }
 
 function versionWebp() {
     return src(paths.imagenes)
         .pipe(webp())
-        .pipe(dest('public/build/img'))
-        .pipe(notify({ message: 'Imagen Completada' }));
+        .pipe(dest('public/build/img'));
 }
-
 
 function watchArchivos() {
     watch(paths.scss, css);
@@ -62,5 +57,8 @@ function watchArchivos() {
 }
 
 exports.css = css;
+exports.javascript = javascript;      
+exports.imagenes = imagenes;          
+exports.versionWebp = versionWebp;    
 exports.watchArchivos = watchArchivos;
 exports.default = parallel(css, javascript, imagenes, versionWebp, watchArchivos); 
